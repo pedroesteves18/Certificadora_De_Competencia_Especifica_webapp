@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://certificadora-de-compet-ncia.onrender.com"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "https://api-dbym.onrender.com"
 
 interface RequestOptions {
   method: string;
