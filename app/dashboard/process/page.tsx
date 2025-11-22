@@ -50,7 +50,7 @@ export default function ProcessPage() {
         return;
       }
 
-      const API = "http://localhost:5000";
+      const API = process.env.NEXT_PUBLIC_API_URL ?? "https://api-dbym.onrender.com";
 
       const res = await fetch(
         `${API}/api/formulas/process?firstMonth=${fm}&lastMonth=${lm}&id=${formulaId}`,
@@ -175,3 +175,4 @@ export default function ProcessPage() {
     </main>
   );
 }
+
