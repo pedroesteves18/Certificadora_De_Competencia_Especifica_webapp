@@ -19,7 +19,13 @@ export type LocalTax = {
   initial: number | null;
   end: number | null;
   factor: number | null;
-  type: "Percent" | "Fixed" | "Multiplier" | "Progressive" | "Regressive" | "Capped";
+  type:
+    | "Percent"
+    | "Fixed"
+    | "Multiplier"
+    | "Progressive"
+    | "Regressive"
+    | "Capped";
   applies: "gain" | "capital";
 };
 
@@ -99,7 +105,7 @@ export default function CreateFormulaPage() {
       case "initial":
       case "end":
       case "factor":
-        tax[field] = (value === "" ? null : Number(value)) as any;;
+        tax[field] = value === "" ? null : Number(value);
         break;
 
       case "type":
@@ -113,8 +119,6 @@ export default function CreateFormulaPage() {
 
     setTaxes(updated);
   };
-
-
 
   const handleInvestmentChange = (
     field: keyof LocalInvestment,
@@ -160,12 +164,12 @@ export default function CreateFormulaPage() {
       <Navbar />
 
       <div className="flex-1 pt-28 px-6 max-w-4xl mx-auto w-full mb-20">
-          <button
-            onClick={() => router.back()}
-            className="mb-6 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800 transition"
-          >
-            ← Voltar
-          </button>
+        <button
+          onClick={() => router.back()}
+          className="mb-6 px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800 transition"
+        >
+          ← Voltar
+        </button>
         <h1 className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-10 tracking-tight">
           Criar Nova Fórmula
         </h1>
@@ -263,7 +267,6 @@ export default function CreateFormulaPage() {
                   key={index}
                   className="p-4 border rounded-lg bg-gray-50/50 relative"
                 >
-                  {/* Botão remover */}
                   <button
                     type="button"
                     onClick={() => removeTax(index)}
@@ -272,17 +275,14 @@ export default function CreateFormulaPage() {
                     ✕
                   </button>
 
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {/* Tipo de taxa */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div>
                       <label className="block text-xs font-medium text-black mb-1">
                         Tipo de Taxa
                       </label>
                       <select
                         value={tax.type}
-                        onChange={(e) =>
-                          handleTaxChange(index, "type", e.target.value)
-                        }
+                        onChange={(e) => handleTaxChange(index, "type", e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
                       >
                         {taxTypes.map((t) => (
@@ -293,7 +293,32 @@ export default function CreateFormulaPage() {
                       </select>
                     </div>
 
-                    {/* Fator */}
+                    <div>
+                      <label className="block text-xs font-medium text-black mb-1">
+                        Início
+                      </label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={tax.initial ?? ""}
+                        onChange={(e) => handleTaxChange(index, "initial", e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-medium text-black mb-1">
+                        Fim
+                      </label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={tax.end ?? ""}
+                        onChange={(e) => handleTaxChange(index, "end", e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
+                      />
+                    </div>
+
                     <div>
                       <label className="block text-xs font-medium text-black mb-1">
                         Fator (%)
@@ -302,23 +327,18 @@ export default function CreateFormulaPage() {
                         type="number"
                         step="0.1"
                         value={tax.factor ?? ""}
-                        onChange={(e) =>
-                          handleTaxChange(index, "factor", e.target.value)
-                        }
+                        onChange={(e) => handleTaxChange(index, "factor", e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
                       />
                     </div>
 
-                    {/* Applies */}
                     <div>
                       <label className="block text-xs font-medium text-black mb-1">
                         Aplica-se sobre
                       </label>
                       <select
                         value={tax.applies}
-                        onChange={(e) =>
-                          handleTaxChange(index, "applies", e.target.value)
-                        }
+                        onChange={(e) => handleTaxChange(index, "applies", e.target.value)}
                         className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-black"
                       >
                         {taxApplies.map((t) => (
@@ -340,7 +360,6 @@ export default function CreateFormulaPage() {
             </div>
           </div>
 
-          {/* ---------------- Erro ---------------- */}
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl">
               <strong className="font-bold">Erro: </strong>
@@ -348,7 +367,6 @@ export default function CreateFormulaPage() {
             </div>
           )}
 
-          {/* ---------------- Salvar ---------------- */}
           <button
             type="submit"
             disabled={isLoading || authLoading}
