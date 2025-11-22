@@ -7,7 +7,7 @@ export function TaxForm({ taxForm, setTaxForm }: TaxFormProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-2">Mês Inicial (opcional)</label>
+        <label className="block text-sm font-medium text-gray-600 mb-2">Início da faixa de ação (opcional)</label>
         <input
           type="number"
           placeholder="Ex: 1"
@@ -17,7 +17,7 @@ export function TaxForm({ taxForm, setTaxForm }: TaxFormProps) {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-600 mb-2">Mês Final (opcional)</label>
+        <label className="block text-sm font-medium text-gray-600 mb-2">Fim da faixa de ação (opcional)</label>
         <input
           type="number"
           placeholder="Ex: 12"
