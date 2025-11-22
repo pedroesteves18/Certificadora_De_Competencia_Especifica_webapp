@@ -59,7 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       const data = await apiClient.post<{ token: string; user: ApiUser }>(
-        "/api/auth/login",
+        "/api/users/login",
         { email, password }
       );
 
@@ -80,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       const data = await apiClient.post<{ token: string; user: ApiUser }>(
-        "/api/auth/register",
+        "/api/users",
         { name, email, password, role }
       );
 
